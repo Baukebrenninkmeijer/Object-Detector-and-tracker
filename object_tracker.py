@@ -150,8 +150,6 @@ while video_capture.isOpened():
         used_colors.append(color)
         clone = visualize.apply_mask(clone, mask, color)
         y1, x1, y2, x2 = roi
-        print(f'({x1},{y1})')
-        print(f'({x2},{y2})')
         cv2.rectangle(clone, (x1, y1), (x2, y2), thickness=2, color=[i * 255 for i in color])
 
         label = class_names[class_id]
