@@ -78,6 +78,23 @@ free_space_frames = 0
 # Have we sent an SMS alert yet?
 sms_sent = False
 
+
+class DetectedObject():
+    def __init__(self, roi, mask, class_id, score):
+        self.roi = roi
+        self.mask = mask
+        self.class_id = class_id
+        self.score = score
+        self.occurences = 0
+
+    def seen(self):
+        self.occurences += 1
+
+    def update(self, rois, masks, class_ids, score):
+
+
+
+
 COLORS = visualize.random_colors(10)
 class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                'bus', 'train', 'truck', 'boat', 'traffic light',
@@ -96,8 +113,11 @@ class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                'teddy bear', 'hair drier', 'toothbrush']
 
 frame_start = time.time()
+counts = dict(class_names)
 prev = None
 overlaps = None
+
+
 # Loop over each frame of video
 while video_capture.isOpened():
     frame_end = time.time()
